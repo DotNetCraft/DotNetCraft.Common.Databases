@@ -9,3 +9,5 @@ src/DotNetCraft.Common.Databases.Mongo/bin/
 src/DotNetCraft.Common.Databases.Mongo/obj/
 tests/DotNetCraft.Common.Databases.Abstractions.Tests/bin/
 tests/DotNetCraft.Common.Databases.Abstractions.Tests/obj/
+tests/DotNetCraft.Common.Databases.Mongo.Tests/bin/
+tests/DotNetCraft.Common.Databases.Mongo.Tests/obj/

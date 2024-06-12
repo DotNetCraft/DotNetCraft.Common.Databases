@@ -40,24 +40,29 @@ namespace DotNetCraft.Common.Databases.Mongo
             ProjectionDefinition<TEntity> projection = null;
 
             var projectionDefinition = specification.ProjectionDefinition;
-            if (projectionDefinition.Includes.Count > 0)
+            if (projectionDefinition != null)
             {
-                projection = projectionBuilder.Include(projectionDefinition.Includes[0]);
-                for (var index = 1; index < projectionDefinition.Includes.Count; index++)
+                if (projectionDefinition.Includes.Count > 0)
                 {
-                    var include = projectionDefinition.Includes[index];
-                    projection = projection.Include(include);
+                    projection = projectionBuilder.Include(projectionDefinition.Includes[0]);
+                    for (var index = 1; index < projectionDefinition.Includes.Count; index++)
+                    {
+                        var include = projectionDefinition.Includes[index];
+                        projection = projection.Include(include);
+                    }
                 }
-            }
 
-            if (projectionDefinition.Excludes.Count > 0)
-            {
-                projection = projection == null ? projectionBuilder.Exclude(projectionDefinition.Excludes[0]) : projection.Exclude(projectionDefinition.Excludes[0]);
-
-                for (var index = 1; index < projectionDefinition.Excludes.Count; index++)
+                if (projectionDefinition.Excludes.Count > 0)
                 {
-                    var include = projectionDefinition.Excludes[index];
-                    projection = projection.Exclude(include);
+                    projection = projection == null
+                        ? projectionBuilder.Exclude(projectionDefinition.Excludes[0])
+                        : projection.Exclude(projectionDefinition.Excludes[0]);
+
+                    for (var index = 1; index < projectionDefinition.Excludes.Count; index++)
+                    {
+                        var include = projectionDefinition.Excludes[index];
+                        projection = projection.Exclude(include);
+                    }
                 }
             }
 
