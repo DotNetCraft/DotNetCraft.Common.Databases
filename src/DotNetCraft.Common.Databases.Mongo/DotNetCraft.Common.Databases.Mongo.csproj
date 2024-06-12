@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\DotNetCraft.Common.Databases.Abstractions\DotNetCraft.Common.Databases.Abstractions.csproj" />
+    <ProjectReference Include="..\DotNetCraft.Common.Databases.Abstractions\DotNetCraft.Common.Databases.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>
