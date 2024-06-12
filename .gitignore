@@ -1,0 +1,9 @@
+.vs/
+DotNetCraft.Common.Databases.Mongo/obj/
+src/DotNetCraft.Common.Databases.Abstractions/obj/
+src/DotNetCraft.Common.Databases.MsSql/obj/
+DotNetCraft.Common.Databases.Mongo/bin/
+src/DotNetCraft.Common.Databases.Abstractions/bin/
+src/DotNetCraft.Common.Databases.MsSql/bin/
+src/DotNetCraft.Common.Databases.Mongo/bin/
+src/DotNetCraft.Common.Databases.Mongo/obj/
