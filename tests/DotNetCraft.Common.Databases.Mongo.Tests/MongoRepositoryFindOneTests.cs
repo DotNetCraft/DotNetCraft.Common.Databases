@@ -29,45 +29,8 @@ namespace DotNetCraft.Common.Databases.Mongo.Tests
                 Id = "123",
                 Name = "Test"
             };
-            _asyncCursor = new TestAsyncCursor<SimpleEntity>(_entity);
+            _asyncCursor = new MockAsyncCursor<SimpleEntity>(new List<SimpleEntity>{_entity});
         }
-
-        public class TestAsyncCursor<TEntity> : IAsyncCursor<TEntity>
-        {
-            private readonly TEntity _entity;
-
-            public TestAsyncCursor(TEntity entity)
-            {
-                _entity = entity;
-            }
-
-            public IEnumerable<TEntity> Current
-            {
-                get
-                {
-                    return new[]
-                    {
-                        _entity
-                    };
-                }
-            }
-
-            public bool MoveNext(CancellationToken cancellationToken = default)
-            {
-                return true;
-            }
-
-            public Task<bool> MoveNextAsync(CancellationToken cancellationToken = default)
-            {
-                return Task.FromResult(true);
-            }
-
-            public void Dispose()
-            {
-                // Nothing to dispose
-            }
-        }
-
 
         [TestMethod]
         public async Task OnFindOneAsync_ReturnsEntity_WhenEntityExists()
