@@ -1,8 +1,0 @@
-﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a085e2db_002D83b9_002D4fff_002D90e1_002D7dd112ce4f41/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ProjectionDefinitionIncludeTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;MSTest::4DBE318C-1AF1-40B1-8F0C-DDD83F6982C9::net8.0::DotNetCraft.Common.Databases.Abstractions.Tests.ProjectionDefinitionTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::B1068D5E-9D05-4F86-8D16-C02E9AD50AD9::net8.0::DotNetCraft.Common.Databases.Mongo.Tests.MongoRepositoryFindOneTests.TestMethod1&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::B1068D5E-9D05-4F86-8D16-C02E9AD50AD9::net8.0::DotNetCraft.Common.Databases.Mongo.Tests.MongoRepositoryTests.OnFindOneAsync_ReturnsEntity_WhenEntityExists&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
