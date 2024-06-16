@@ -1,5 +1,6 @@
 using DotNetCraft.Common.Databases.Abstractions.Interfaces;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using MongoDB.Driver;
 using NSubstitute;
 
@@ -12,7 +13,7 @@ namespace DotNetCraft.Common.Databases.Mongo.Tests
         public async Task OnFindOneAsync_ReturnsEntity_WhenEntityExists()
         {
             var collection = Substitute.For<IMongoCollection<SimpleEntity>>();
-            var logger = Substitute.For<ILogger<MongoRepository<SimpleEntity>>>();
+            var logger = new NullLogger<MongoRepository<SimpleEntity>>();
             var specification = Substitute.For<ISpecification<SimpleEntity>>();
 
             var entity = new SimpleEntity
