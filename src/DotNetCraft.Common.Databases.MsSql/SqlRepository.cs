@@ -40,10 +40,7 @@ namespace DotNetCraft.Common.Databases.MsSql
             {
                 if (specification.SearchDefinition.Skip.HasValue)
                     query = query.Skip(specification.SearchDefinition.Skip.Value);
-                if (specification.SearchDefinition.Take.HasValue)
-                    query = query.Take(specification.SearchDefinition.Take.Value);
-                else
-                    query = query.Take(1);
+                query = query.Take(specification.SearchDefinition.Take ?? 1);
             }
 
             if (specification.ProjectionDefinition != null)
