@@ -29,7 +29,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A3F0961C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetCraft.Common.Databases.Abstractions.Tests", "tests\DotNetCraft.Common.Databases.Abstractions.Tests\DotNetCraft.Common.Databases.Abstractions.Tests.csproj", "{4DBE318C-1AF1-40B1-8F0C-DDD83F6982C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetCraft.Common.Databases.Mongo.Tests", "tests\DotNetCraft.Common.Databases.Mongo.Tests\DotNetCraft.Common.Databases.Mongo.Tests.csproj", "{B1068D5E-9D05-4F86-8D16-C02E9AD50AD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetCraft.Common.Databases.Mongo.Tests", "tests\DotNetCraft.Common.Databases.Mongo.Tests\DotNetCraft.Common.Databases.Mongo.Tests.csproj", "{B1068D5E-9D05-4F86-8D16-C02E9AD50AD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetCraft.Common.Databases.MsSql.Tests", "tests\DotNetCraft.Common.Databases.MsSql.Tests\DotNetCraft.Common.Databases.MsSql.Tests.csproj", "{57D247B7-A52A-4EB5-BFEA-AD03570123C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{B1068D5E-9D05-4F86-8D16-C02E9AD50AD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1068D5E-9D05-4F86-8D16-C02E9AD50AD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1068D5E-9D05-4F86-8D16-C02E9AD50AD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57D247B7-A52A-4EB5-BFEA-AD03570123C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57D247B7-A52A-4EB5-BFEA-AD03570123C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57D247B7-A52A-4EB5-BFEA-AD03570123C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57D247B7-A52A-4EB5-BFEA-AD03570123C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{A3F0961C-DDBD-49AF-B3C5-F40A3872872D} = {7DB77D16-21B8-4EDB-9032-1D0E3D4D5672}
 		{4DBE318C-1AF1-40B1-8F0C-DDD83F6982C9} = {6C266105-6D80-45F2-811D-6AB6161E98C9}
 		{B1068D5E-9D05-4F86-8D16-C02E9AD50AD9} = {4300A7EC-BF37-4086-8040-C1B4E29EB6AD}
+		{57D247B7-A52A-4EB5-BFEA-AD03570123C4} = {A3F0961C-DDBD-49AF-B3C5-F40A3872872D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B9330BF2-B6BB-43F1-8F3D-031FB2ADBF18}

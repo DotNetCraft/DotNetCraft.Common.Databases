@@ -11,7 +11,7 @@ using MongoDB.Driver;
 
 namespace DotNetCraft.Common.Databases.Mongo
 {
-    public class MongoRepository<TEntity> : BaseRepository<TEntity>
+    internal class MongoRepository<TEntity> : BaseRepository<TEntity>
     where TEntity : class
     {
         private readonly IMongoCollection<TEntity> _collection;

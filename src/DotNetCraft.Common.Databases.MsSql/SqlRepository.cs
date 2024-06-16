@@ -16,9 +16,9 @@ namespace DotNetCraft.Common.Databases.MsSql
     internal class SqlRepository<TEntity>: BaseRepository<TEntity> 
         where TEntity : class
     {
-        private readonly DbSet<TEntity> _dbSet;
+        private readonly IDbSet<TEntity> _dbSet;
 
-        public SqlRepository(DbSet<TEntity> dbSet, ILogger<BaseRepository<TEntity>> logger) : base(logger)
+        public SqlRepository(IDbSet<TEntity> dbSet, ILogger<BaseRepository<TEntity>> logger) : base(logger)
         {
             _dbSet = dbSet ?? throw new ArgumentNullException(nameof(dbSet));
         }
@@ -36,13 +36,15 @@ namespace DotNetCraft.Common.Databases.MsSql
                     query = query.OrderByDescending(specification.OrderDefinition.OrderBy);
             }
 
-            if (specification.SearchDefinition.Skip.HasValue)
-                query = query.Skip(specification.SearchDefinition.Skip.Value);
-            if (specification.SearchDefinition.Take.HasValue)
-                query = query.Take(specification.SearchDefinition.Take.Value);
-            else
-                query = query.Take(1);
-
+            if (specification.SearchDefinition != null)
+            {
+                if (specification.SearchDefinition.Skip.HasValue)
+                    query = query.Skip(specification.SearchDefinition.Skip.Value);
+                if (specification.SearchDefinition.Take.HasValue)
+                    query = query.Take(specification.SearchDefinition.Take.Value);
+                else
+                    query = query.Take(1);
+            }
 
             if (specification.ProjectionDefinition != null)
             {

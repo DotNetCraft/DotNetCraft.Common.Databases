@@ -11,3 +11,5 @@ tests/DotNetCraft.Common.Databases.Abstractions.Tests/bin/
 tests/DotNetCraft.Common.Databases.Abstractions.Tests/obj/
 tests/DotNetCraft.Common.Databases.Mongo.Tests/bin/
 tests/DotNetCraft.Common.Databases.Mongo.Tests/obj/
+tests/DotNetCraft.Common.Databases.MsSql.Tests/bin/
+tests/DotNetCraft.Common.Databases.MsSql.Tests/obj/
