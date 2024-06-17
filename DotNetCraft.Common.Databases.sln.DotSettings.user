@@ -1,0 +1,7 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=09cce80c_002D139a_002D4fd0_002Da6fb_002Dd3d15978c167/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="SimpleProjectionTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::B1068D5E-9D05-4F86-8D16-C02E9AD50AD9::net8.0::DotNetCraft.Common.Databases.Mongo.Tests.MongoRepositoryProjectionTests.SimpleProjectionTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::4DBE318C-1AF1-40B1-8F0C-DDD83F6982C9::net8.0::DotNetCraft.Common.Databases.Abstractions.Tests.ProjectionDefinitionUniqueKeyTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

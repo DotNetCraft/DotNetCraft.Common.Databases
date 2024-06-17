@@ -15,10 +15,12 @@ namespace DotNetCraft.Common.Databases.Mongo
     where TEntity : class
     {
         private readonly IMongoCollection<TEntity> _collection;
+        private readonly IProjectionBuilder<TEntity> _projectionBuilder;
 
-        public MongoRepository(IMongoCollection<TEntity> collection, ILogger<MongoRepository<TEntity>> logger) : base(logger)
+        public MongoRepository(IMongoCollection<TEntity> collection, IProjectionBuilder<TEntity> projectionBuilder, ILogger<MongoRepository<TEntity>> logger) : base(logger)
         {
             _collection = collection ?? throw new ArgumentNullException(nameof(collection));
+            _projectionBuilder = projectionBuilder ?? throw new ArgumentNullException(nameof(projectionBuilder));
         }
 
         #region Overrides of BaseRepository<TEntity>
@@ -29,46 +31,17 @@ namespace DotNetCraft.Common.Databases.Mongo
                 ? FilterDefinition<TEntity>.Empty
                 : Builders<TEntity>.Filter.Where(specification.Filter);
 
-            var findOptions = new FindOptions<TEntity>
-            {
-                Limit = specification.SearchDefinition == null ? 1 : specification.SearchDefinition.Take,
-                Skip = specification.SearchDefinition == null ? 0 : specification.SearchDefinition.Skip,
-            };
-
-
-            var projectionBuilder = Builders<TEntity>.Projection;
-            ProjectionDefinition<TEntity> projection = null;
-
             var projectionDefinition = specification.ProjectionDefinition;
+
+            var find = _collection.Find(filter);
             if (projectionDefinition != null)
             {
-                if (projectionDefinition.Includes.Count > 0)
-                {
-                    projection = projectionBuilder.Include(projectionDefinition.Includes[0]);
-                    for (var index = 1; index < projectionDefinition.Includes.Count; index++)
-                    {
-                        var include = projectionDefinition.Includes[index];
-                        projection = projection.Include(include);
-                    }
-                }
-
-                if (projectionDefinition.Excludes.Count > 0)
-                {
-                    projection = projection == null
-                        ? projectionBuilder.Exclude(projectionDefinition.Excludes[0])
-                        : projection.Exclude(projectionDefinition.Excludes[0]);
-
-                    for (var index = 1; index < projectionDefinition.Excludes.Count; index++)
-                    {
-                        var include = projectionDefinition.Excludes[index];
-                        projection = projection.Exclude(include);
-                    }
-                }
+                var projection = _projectionBuilder.Build(projectionDefinition);
+                find = find.Project<TEntity>(projection);
             }
 
-            var findResult = await _collection.FindAsync(filter, findOptions, token);
-            var item = await findResult.FirstAsync(token);
-            return item;
+            var entity = await find.FirstOrDefaultAsync(token);
+            return entity;
         }
 
         protected override IAsyncEnumerable<TEntity> OnFindManyAsync(ISpecification<TEntity> specification, CancellationToken token = default)

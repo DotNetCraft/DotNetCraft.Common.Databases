@@ -18,6 +18,7 @@ namespace DotNetCraft.Common.Databases.Mongo.Tests
             var collection = Substitute.For<IMongoCollection<SimpleEntity>>();
             var logger = new NullLogger<MongoRepository<SimpleEntity>>();
             var specification = Substitute.For<ISpecification<SimpleEntity>>();
+            var projectionBuilder = Substitute.For<IProjectionBuilder<SimpleEntity>>();
 
             var entity = new SimpleEntity
             {
@@ -27,7 +28,7 @@ namespace DotNetCraft.Common.Databases.Mongo.Tests
             var asyncCursor = new MockAsyncCursor<SimpleEntity>(new List<SimpleEntity> { entity });
 
             // Arrange
-            var sut = new MongoRepository<SimpleEntity>(collection, logger);
+            var sut = new MongoRepository<SimpleEntity>(collection, projectionBuilder, logger);
 
             collection.FindAsync(Arg.Any<FilterDefinition<SimpleEntity>>(), Arg.Any<FindOptions<SimpleEntity>>(),
                     Arg.Any<CancellationToken>())
@@ -45,6 +46,7 @@ namespace DotNetCraft.Common.Databases.Mongo.Tests
         public async Task OnFindOneAsync_ReturnsEntity_WhenEntityExists2()
         {
             var logger = new NullLogger<MongoRepository<SimpleEntity>>();
+            var projectionBuilder = Substitute.For<IProjectionBuilder<SimpleEntity>>();
 
             var entity = new SimpleEntity
             {
@@ -68,10 +70,7 @@ namespace DotNetCraft.Common.Databases.Mongo.Tests
 
                 await collection.InsertOneAsync(entity);
 
-                var res = await collection.FindAsync(x=>x.Id == entity.Id);
-
-
-                var repository = new MongoRepository<SimpleEntity>(collection, logger);
+                var repository = new MongoRepository<SimpleEntity>(collection, projectionBuilder, logger);
 
                 var actual = await repository.FindOneAsync(specification);
 
