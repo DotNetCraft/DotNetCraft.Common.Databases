@@ -1,6 +1,7 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using DotNetCraft.Common.Databases.Abstractions.Implementations;
+using DotNetCraft.Common.Databases.MsSql.Tests.Utils;
 using Microsoft.Extensions.Logging.Abstractions;
 using NSubstitute;
 
@@ -12,15 +13,14 @@ namespace DotNetCraft.Common.Databases.MsSql.Tests
         [TestMethod]
         public async Task OnFindOneAsync_ReturnsEntity_WhenEntityExists()
         {
-            // create substitution with async
-            var data = new List<SimpleEntity>
+            var entity = new SimpleEntity
             {
-                new SimpleEntity
-                {
-                    Id = "123",
-                    Name = "Test"
-                }
+                Id = "123",
+                Name = "Test"
             };
+
+
+            var data = new List<SimpleEntity> { entity };
 
             var mockSet = Substitute.For<IDbSet<SimpleEntity>, IDbAsyncEnumerable<SimpleEntity>>().Initialize(data.AsQueryable());
 
@@ -33,10 +33,10 @@ namespace DotNetCraft.Common.Databases.MsSql.Tests
 
             var repository = new SqlRepository<SimpleEntity>(mockSet, logger);
             
-            var result = await repository.FindOneAsync(specification);
+            var actual = await repository.FindOneAsync(specification);
 
-            // Assert
-            Assert.AreEqual("123", result.Id);
+            Assert.AreEqual(entity.Id, actual.Id);
+            Assert.AreEqual(entity.Name, actual.Name);
         }
     }
 }

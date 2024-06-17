@@ -32,7 +32,7 @@ namespace DotNetCraft.Common.Databases.Mongo
             var findOptions = new FindOptions<TEntity>
             {
                 Limit = specification.SearchDefinition == null ? 1 : specification.SearchDefinition.Take,
-                Skip = specification.SearchDefinition == null ? 1 : specification.SearchDefinition.Skip,
+                Skip = specification.SearchDefinition == null ? 0 : specification.SearchDefinition.Skip,
             };
 
 

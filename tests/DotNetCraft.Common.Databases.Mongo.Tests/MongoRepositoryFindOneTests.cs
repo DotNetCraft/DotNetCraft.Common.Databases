@@ -1,7 +1,10 @@
+using DotNetCraft.Common.Databases.Abstractions.Implementations;
 using DotNetCraft.Common.Databases.Abstractions.Interfaces;
+using EphemeralMongo;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using MongoDB.Driver;
+using MongoDB.Driver.Core.Configuration;
 using NSubstitute;
 
 namespace DotNetCraft.Common.Databases.Mongo.Tests
@@ -25,8 +28,9 @@ namespace DotNetCraft.Common.Databases.Mongo.Tests
 
             // Arrange
             var sut = new MongoRepository<SimpleEntity>(collection, logger);
-            
-            collection.FindAsync(Arg.Any<FilterDefinition<SimpleEntity>>(), Arg.Any<FindOptions<SimpleEntity>>(), Arg.Any<CancellationToken>())
+
+            collection.FindAsync(Arg.Any<FilterDefinition<SimpleEntity>>(), Arg.Any<FindOptions<SimpleEntity>>(),
+                    Arg.Any<CancellationToken>())
                 .ReturnsForAnyArgs(asyncCursor);
 
             // Act
@@ -35,6 +39,45 @@ namespace DotNetCraft.Common.Databases.Mongo.Tests
             // Assert
             Assert.AreEqual(entity, result);
 
+        }
+
+        [TestMethod]
+        public async Task OnFindOneAsync_ReturnsEntity_WhenEntityExists2()
+        {
+            var logger = new NullLogger<MongoRepository<SimpleEntity>>();
+
+            var entity = new SimpleEntity
+            {
+                Id = "123",
+                Name = "Test"
+            };
+
+            var specification = new Specification<SimpleEntity>
+            {
+                Filter = x => x.Id == entity.Id
+            };
+
+            var options = new MongoRunnerOptions();
+            using (var runner = MongoRunner.Run(options))
+            {
+                var database = new MongoClient(runner.ConnectionString).GetDatabase("default");
+
+                // Do something with the database
+                await database.CreateCollectionAsync("SimpleEntity");
+                var collection = database.GetCollection<SimpleEntity>("SimpleEntity");
+
+                await collection.InsertOneAsync(entity);
+
+                var res = await collection.FindAsync(x=>x.Id == entity.Id);
+
+
+                var repository = new MongoRepository<SimpleEntity>(collection, logger);
+
+                var actual = await repository.FindOneAsync(specification);
+
+                Assert.AreEqual(entity.Id, actual.Id);
+                Assert.AreEqual(entity.Name, actual.Name);
+            }
         }
     }
 }
